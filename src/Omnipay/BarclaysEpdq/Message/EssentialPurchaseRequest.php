@@ -117,6 +117,16 @@ class EssentialPurchaseRequest extends AbstractRequest
         return $this->setParameter('callbackMethod', $value);
     }
 
+    public function getOperation()
+    {
+        return $this->getParameter('operation');
+    }
+
+    public function setOperation($value)
+    {
+        return $this->setParameter('operation', $value);
+    }
+
     /**
      * Get the page layout configuration
      *
@@ -281,6 +291,11 @@ class EssentialPurchaseRequest extends AbstractRequest
             $data['ECOM_SHIPTO_TELECOM_FAX_NUMBER'] = $delivery->getDeliveryFax();
             $data['ECOM_SHIPTO_TELECOM_PHONE_NUMBER'] = $delivery->getDeliveryPhone();
             $data['ECOM_SHIPTO_DOB'] = $delivery->getDeliveryBirthDate();
+        }
+
+        $operation = $this->getOperation();
+        if ($operation) {
+            $data['OPERATION'] = $operation;
         }
 
         $data = $this->cleanParameters($data);
